@@ -1,9 +1,11 @@
 # MySQL data directory
 mysql-data/
+mysql-data/*
 
 # SSL certificates (consider if you want to include these in the repo or not)
 # ssl/*.pem
 ssl/
+ssl/*
 
 # Environment variables
 .env

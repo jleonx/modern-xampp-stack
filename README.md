@@ -20,7 +20,7 @@ A modern, dockerized XAMPP stack with SSL support for local development.
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/modern-xampp-stack.git
+   git clone https://github.com/jleonx/modern-xampp-stack.git
    cd modern-xampp-stack
    ```
 
