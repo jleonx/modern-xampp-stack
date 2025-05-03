@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+  apache-php:
+    image: php:8.2-apache
+    container_name: xampp-apache
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./www:/var/www/html
+      - ./ssl/cert.pem:/etc/ssl/certs/ssl-cert-snakeoil.pem
+      - ./ssl/key.pem:/etc/ssl/private/ssl-cert-snakeoil.key
+      - ./apache-config:/etc/apache2/sites-enabled
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    depends_on:
+      - mysql
+    command: >
+      bash -c "a2enmod ssl &&
+               a2enmod rewrite &&
+               apache2-foreground"
+    networks:
+      - xampp-network
+  mysql:
+    image: mysql:8.0
+    container_name: xampp-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_pass
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - xampp-network
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: xampp-phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - xampp-network
+networks:
+  xampp-network:
+    driver: bridge

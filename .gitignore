@@ -1,0 +1,17 @@
+# MySQL data directory
+mysql-data/
+
+# SSL certificates (consider if you want to include these in the repo or not)
+# ssl/*.pem
+ssl/
+
+# Environment variables
+.env
+
+# IDE files
+.idea/
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
